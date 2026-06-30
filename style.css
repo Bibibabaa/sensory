@@ -9,7 +9,7 @@
   --mint:      #A8E6CF;
   --cream:     #F9F7F4;
   --charcoal:  #2D2D3A;
-  --gray50:    #F3F4F6;
+  --gray50:    #F3F4F6; 
   --gray100:   #E5E7EB;
   --gray300:   #D1D5DB;
   --gray400:   #9CA3AF;
@@ -101,7 +101,7 @@ header {
   gap: 24px;
 }
 
-header img { height: 38px; }
+header img { height: 100px; }
 
 nav {
   display: flex;
@@ -1135,8 +1135,8 @@ nav a:focus-visible,
 }
 
 .form-success .check { font-size: 52px; margin-bottom: 16px; }
-.form-success h3 { color: var(--navy); margin-bottom: 8px; }
-.form-success p  { color: var(--gray700); font-size: 15px; }
+.form-success h3 { color: rgba(255, 255, 255, 0.85); margin-bottom: 8px; }
+.form-success p  {color: rgba(70, 84, 102, 0.85); font-size: 15px; }
 
 /* ─── BACK TO TOP ────────────────────────────────── */
 .back-to-top {
