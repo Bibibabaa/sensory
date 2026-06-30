@@ -190,4 +190,48 @@ document.querySelectorAll(".event-expand").forEach((card) => {
     });
     requestAnimationFrame(loop);
   })();
-})(); 
+})();
+
+// ─── SCROLL PROGRESS BAR (added) ─────────────────
+(function () {
+  const bar = document.getElementById("scrollProgress");
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+
+// ─── HERO TITLE WORD-BY-WORD ANIMATION (added) ───
+(function () {
+  const h1 = document.querySelector(".hero h1");
+  if (!h1) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let wordIndex = 0;
+  const delayStep = 0.08;
+  function wrapTextNode(node) {
+    const parts = node.textContent.split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    parts.forEach((part) => {
+      if (part.trim() === "") { frag.appendChild(document.createTextNode(part)); return; }
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = part;
+      span.style.animationDelay = (0.15 + wordIndex * delayStep) + "s";
+      wordIndex++;
+      frag.appendChild(span);
+    });
+    node.parentNode.replaceChild(frag, node);
+  }
+  Array.from(h1.childNodes).forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) wrapTextNode(node);
+    else if (node.nodeType === Node.ELEMENT_NODE) {
+      node.classList.add("word");
+      node.style.animationDelay = (0.15 + wordIndex * delayStep) + "s";
+      wordIndex++;
+    }
+  });
+})();
